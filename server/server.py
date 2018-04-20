@@ -15,5 +15,10 @@ def getData():
 	data = json.load(file_handle)
 	return jsonify(data)
 
+@app.route('/sendUserData', methods=["POST"])
+def sendData():
+	print(request.get_json())
+	return 'OK'
+
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=3000, debug=True)

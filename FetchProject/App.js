@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+var ngrokStem = "2b175ca1";
+
 export default class App extends React.Component {
   constructor(props){
     super(props);
@@ -8,7 +10,19 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    return fetch('http://1cea0967.ngrok.io/getData')
+    fetch('https://' + ngrokStem + '.ngrok.io/sendUserData', {  
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userID: 'tylerta',
+        preferences: [0, 5, 1, 2]
+      })
+    })
+
+    return fetch('http://' + ngrokStem + '.ngrok.io/getData')
       .then(function(response) {
         return response.json()
       })
